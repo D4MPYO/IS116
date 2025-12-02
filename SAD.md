@@ -10,256 +10,210 @@
 
 ```mermaid
 graph TB
-    subgraph "Client Layer - Frontend"
-        A1[Student Dashboard<br/>studentDashboard.html]
-        A2[Admin Dashboard<br/>adminDashboard.html]
-        A3[Teacher Dashboard<br/>teacherDashboard.html]
-        A4[Application Form<br/>applicationForm.html]
-        A5[Documents Manager<br/>documents.html]
-        A6[Users Management<br/>users.html]
-        A7[Sections Manager<br/>sections.html]
-        A8[Login Page<br/>login.html]
+    subgraph LAYER1["🎨 LAYER 1: PRESENTATION LAYER"]
+        direction LR
+        P1["<b>Student Dashboard</b><br/>View Grades<br/>Check Application Status"]
+        P2["<b>Teacher Dashboard</b><br/>Manage Classes<br/>Enter Grades"]
+        P3["<b>Admin Dashboard</b><br/>System Management<br/>User Control"]
     end
 
-    subgraph "JavaScript Layer - Client-Side Logic"
-        B1[Firebase Auth SDK<br/>firebaseConfig.js]
-        B2[Role-Based Auth<br/>roleBasedAuth.js]
-        B3[API Config<br/>apiConfig.js]
-        B4[Applications Handler<br/>applications.js]
-        B5[Documents Handler<br/>documents.js]
-        B6[Users Handler<br/>users.js]
-        B7[Access Control<br/>accessControl.js]
+    subgraph LAYER2["🔐 LAYER 2: SECURITY LAYER"]
+        direction LR
+        S1["<b>Firebase Auth</b><br/>OAuth 2.0<br/>JWT Tokens"]
+        S2["<b>Role-Based Access</b><br/>Admin/Teacher/Student<br/>Permission Control"]
+        S3["<b>Session Management</b><br/>Token Validation<br/>Secure Sessions"]
     end
 
-    subgraph "External Services"
-        EXT1[Firebase Authentication<br/>Google Cloud]
-        EXT2[PSGC Location API<br/>psgc.gitlab.io]
-        EXT3[SMTP Server<br/>Gmail SMTP]
-        EXT4[reCAPTCHA<br/>Google]
+    subgraph LAYER3["⚙️ LAYER 3: APPLICATION LAYER - Backend"]
+        direction TB
+        
+        subgraph APP_COL1["Core APIs"]
+            A1["<b>Login System</b><br/>api/login.php<br/>User Authentication"]
+            A2["<b>Application Management</b><br/>api/submit_application.php<br/>api/get_application.php"]
+        end
+        
+        subgraph APP_COL2["Learning Tools"]
+            A3["<b>Enrollment System</b><br/>Application Processing<br/>Student Registration"]
+            A4["<b>Section Assignment</b><br/>api/students/move.php<br/>Class Management"]
+            A5["<b>Grade Management</b><br/>api/teachers/*<br/>Score Entry"]
+            A6["<b>Document Verification</b><br/>api/verify_document.php<br/>File Management"]
+        end
+        
+        subgraph APP_COL3["Support Systems"]
+            A7["<b>Email Queue System</b><br/>Notifications<br/>SMTP Delivery"]
+            A8["<b>Settings Manager</b><br/>api/settings/public.php<br/>System Config"]
+        end
     end
 
-    subgraph "API Gateway Layer"
-        C1[Authentication API<br/>api/login.php]
-        C2[User Sync API<br/>api/sync_user.php]
-        C3[Application APIs<br/>api/submit_application.php<br/>api/get_application.php<br/>api/get_all_applications.php]
-        C4[Document APIs<br/>api/upload_document_enhanced.php<br/>api/verify_document.php<br/>api/download_document.php]
-        C5[Student APIs<br/>api/students/create.php<br/>api/students/get_all.php<br/>api/students/move.php]
-        C6[Section APIs<br/>api/sections/list.php<br/>api/sections/create.php]
-        C7[Teacher APIs<br/>api/teachers/get_assignments.php]
-        C8[Admin APIs<br/>api/admin_dashboard.php<br/>api/get_users.php<br/>api/update_user_role.php]
-        C9[Settings APIs<br/>api/settings/public.php]
-        C10[Email Queue API<br/>api/process_email_queue.php]
+    subgraph LAYER4["💾 LAYER 4: DATA STORAGE & BUSINESS LOGIC"]
+        direction TB
+        
+        subgraph DATA_COL1["Public Cloud Services"]
+            D1["<b>Firebase Platform</b><br/>User Authentication<br/>Token Management"]
+            D2["<b>PSGC API</b><br/>Location Services<br/>Address Validation"]
+            D3["<b>Gmail SMTP</b><br/>Email Delivery<br/>Notifications"]
+        end
+        
+        subgraph DATA_COL2["Private Cloud - Database"]
+            D4["<b>MySQL Database</b><br/>vpes_sims"]
+            D5["<b>Core Tables</b><br/>users, students<br/>applications, sections"]
+            D6["<b>Supporting Tables</b><br/>grades, documents<br/>enrollments, logs"]
+        end
+        
+        subgraph DATA_COL3["Private Cloud - File Storage"]
+            D7["<b>Document Storage</b><br/>uploads/documents/<br/>PDF, Images"]
+            D8["<b>Cache Files</b><br/>cache/<br/>JSON Data"]
+            D9["<b>System Logs</b><br/>logs/<br/>Error Tracking"]
+        end
     end
 
-    subgraph "Configuration Layer"
-        D1[Database Config<br/>config/database.php]
-        D2[Firebase Config<br/>config/firebase.php]
-        D3[Email Config<br/>config/email.php]
-        D4[Mailer Service<br/>config/Mailer.php]
+    subgraph LAYER5["🏗️ LAYER 5: INFRASTRUCTURE - Fixed Platform"]
+        direction LR
+        I1["<b>Web Server</b><br/>Apache XAMPP<br/>PHP 7.4+"]
+        I2["<b>Database Server</b><br/>MySQL 8.0<br/>Local Storage"]
+        I3["<b>Task Scheduler</b><br/>Windows Scheduler<br/>Cron Jobs"]
     end
 
-    subgraph "Business Logic Layer - PHP Classes"
-        E1[Application Class<br/>classes/Application.php]
-        E2[User Class<br/>classes/User.php]
-        E3[Document Class<br/>classes/Document.php]
-        E4[Logger Class<br/>classes/Logger.php]
+    subgraph BUSINESS_LOGIC["Business Logic Classes"]
+        direction LR
+        BL1["<b>Application.php</b><br/>Enrollment Processing<br/>Location Decoding"]
+        BL2["<b>User.php</b><br/>Firebase Sync<br/>User Management"]
+        BL3["<b>Document.php</b><br/>File Upload<br/>Verification"]
+        BL4["<b>Logger.php</b><br/>Activity Logs<br/>Audit Trail"]
     end
 
-    subgraph "Data Access Layer"
-        F1[(MySQL Database<br/>vpes_sims)]
+    subgraph CONFIG["Configuration Layer"]
+        direction LR
+        CF1["<b>database.php</b><br/>PDO Connection"]
+        CF2["<b>firebase.php</b><br/>JWT Verification"]
+        CF3["<b>email.php</b><br/>SMTP Config"]
+        CF4["<b>Mailer.php</b><br/>Email Service"]
     end
 
-    subgraph "Database Tables - Core Entities"
-        G1[users]
-        G2[applications]
-        G3[application_personal_info]
-        G4[application_addresses]
-        G5[application_guardians]
-        G6[students]
-        G7[student_addresses]
-        G8[student_guardians]
-        G9[sections]
-        G10[teachers]
-    end
+    %% LAYER 1 to LAYER 2 Connections
+    P1 -->|"Login Request"| S1
+    P2 -->|"Auth Token"| S2
+    P3 -->|"Admin Access"| S3
 
-    subgraph "Database Tables - Supporting Entities"
-        H1[documents]
-        H2[enrollments]
-        H3[grades]
-        H4[class_schedules]
-        H5[teacher_subject_assignments]
-        H6[application_logs]
-        H7[enrollment_history]
-        H8[email_queue]
-        H9[system_settings]
-    end
+    %% LAYER 2 to LAYER 3 Connections
+    S1 -->|"Verified Token"| A1
+    S2 -->|"Role Check"| A2
+    S3 -->|"Session Valid"| A3
 
-    subgraph "File Storage Layer"
-        I1[Document Uploads<br/>uploads/documents/]
-        I2[Cache Storage<br/>cache/psgc_decoded_locations.json<br/>cache/firebase_keys.json]
-        I3[Logs<br/>logs/]
-    end
+    %% LAYER 3 Internal Connections
+    A1 -.->|"User Data"| A2
+    A2 -.->|"Enrollment"| A3
+    A3 -.->|"Assign Section"| A4
+    A4 -.->|"Student List"| A5
+    A5 -.->|"Upload Docs"| A6
+    A6 -.->|"Notify"| A7
+    A7 -.->|"Config"| A8
 
-    subgraph "Scheduled Tasks & Background Jobs"
-        J1[Email Queue Processor<br/>process_queue_cron.php]
-        J2[Automated Scheduler<br/>automated_schedule/]
-        J3[Windows Task Scheduler<br/>run_queue_silent.vbs]
-    end
+    %% LAYER 3 to Business Logic
+    A1 -->|"Authenticate"| BL2
+    A2 -->|"Process App"| BL1
+    A3 -->|"Create Record"| BL1
+    A4 -->|"Update Student"| BL2
+    A6 -->|"Verify File"| BL3
+    A7 -->|"Log Event"| BL4
 
-    %% Client to JavaScript connections
-    A1 -->|User Interaction| B1
-    A2 -->|User Interaction| B2
-    A3 -->|User Interaction| B3
-    A4 -->|Form Submission| B4
-    A5 -->|Document Upload| B5
-    A6 -->|User Management| B6
-    A7 -->|Section Assignment| B7
-    A8 -->|Authentication| B1
+    %% Business Logic to Config
+    BL1 -->|"Get Connection"| CF1
+    BL1 -->|"Decode Location"| CF2
+    BL2 -->|"DB Access"| CF1
+    BL3 -->|"Store File"| CF1
+    BL4 -->|"Write Log"| CF1
+    A7 -->|"Send Email"| CF4
 
-    %% JavaScript to External Services
-    B1 -->|OAuth 2.0 / JWT Token| EXT1
-    B2 -->|ID Token Verification| EXT1
+    %% Config to LAYER 4
+    CF1 -->|"PDO Query"| D4
+    CF2 -->|"API Call"| D1
+    CF4 -->|"SMTP Send"| D3
+    BL1 -->|"HTTP GET"| D2
 
-    %% JavaScript to API Gateway
-    B1 -->|POST: Login Request<br/>Bearer Token| C1
-    B2 -->|POST: Sync User Data<br/>Firebase UID| C2
-    B4 -->|POST: Application Data<br/>JSON Payload| C3
-    B4 -->|GET: Fetch Application<br/>Authorization Header| C3
-    B5 -->|POST: Multipart Form Data<br/>File Upload| C4
-    B5 -->|GET: Document List<br/>Query Params| C4
-    B6 -->|GET: User List<br/>Filters & Pagination| C8
-    B6 -->|PUT: Update Role<br/>User ID & Role| C8
-    B3 -->|GET: API Endpoint<br/>Dynamic Base URL| C3
+    %% LAYER 4 Internal Database
+    D4 -.->|"Schema"| D5
+    D5 -.->|"Relations"| D6
+    BL3 -->|"Save File"| D7
+    BL1 -->|"Cache Data"| D8
+    BL4 -->|"Write Logs"| D9
 
-    %% API to Configuration
-    C1 -->|Database Connection| D1
-    C1 -->|Verify ID Token| D2
-    C2 -->|Database Connection| D1
-    C3 -->|Database Connection| D1
-    C4 -->|Database Connection| D1
-    C5 -->|Database Connection| D1
-    C6 -->|Database Connection| D1
-    C7 -->|Database Connection| D1
-    C8 -->|Database Connection| D1
-    C9 -->|Database Connection| D1
-    C10 -->|SMTP Configuration| D3
-    C10 -->|Send Email| D4
-
-    %% API to Business Logic
-    C1 -->|Authenticate User| E2
-    C2 -->|Sync Firebase User| E2
-    C3 -->|CRUD Operations| E1
-    C4 -->|Upload/Verify Docs| E3
-    C8 -->|User Operations| E2
-    E1 -->|Log Actions| E4
-    E3 -->|Log Actions| E4
-
-    %% Business Logic to External APIs
-    E1 -->|HTTP GET Request<br/>Location Code Lookup| EXT2
-    D4 -->|SMTP TLS Port 587<br/>Email Delivery| EXT3
-    C1 -->|POST: Token Validation<br/>Site Key| EXT4
-
-    %% Configuration to Database
-    D1 -->|PDO Connection<br/>MySQL Driver| F1
-
-    %% Database to Tables
-    F1 -.->|Schema Definition| G1
-    F1 -.->|Schema Definition| G2
-    F1 -.->|Schema Definition| G3
-    F1 -.->|Schema Definition| G4
-    F1 -.->|Schema Definition| G5
-    F1 -.->|Schema Definition| G6
-    F1 -.->|Schema Definition| G7
-    F1 -.->|Schema Definition| G8
-    F1 -.->|Schema Definition| G9
-    F1 -.->|Schema Definition| G10
-
-    F1 -.->|Schema Definition| H1
-    F1 -.->|Schema Definition| H2
-    F1 -.->|Schema Definition| H3
-    F1 -.->|Schema Definition| H4
-    F1 -.->|Schema Definition| H5
-    F1 -.->|Schema Definition| H6
-    F1 -.->|Schema Definition| H7
-    F1 -.->|Schema Definition| H8
-    F1 -.->|Schema Definition| H9
-
-    %% Table Relationships
-    G1 -->|Foreign Key<br/>user_id| G2
-    G2 -->|Foreign Key<br/>application_id| G3
-    G2 -->|Foreign Key<br/>application_id| G4
-    G2 -->|Foreign Key<br/>application_id| G5
-    G2 -->|Foreign Key<br/>application_id| H1
-    G2 -->|Foreign Key<br/>application_id| H6
-    G2 -->|Enrollment Process| G6
-    G6 -->|Foreign Key<br/>student_id| G7
-    G6 -->|Foreign Key<br/>student_id| G8
-    G6 -->|Foreign Key<br/>section_id| G9
-    G6 -->|Foreign Key<br/>student_id| H2
-    G6 -->|Foreign Key<br/>student_id| H3
-    G9 -->|Foreign Key<br/>section_id| H4
-    G10 -->|Foreign Key<br/>teacher_id| H5
-    G9 -->|Foreign Key<br/>section_id| H5
-    G6 -->|Foreign Key<br/>student_id| H7
-    G1 -->|Foreign Key<br/>user_id| H8
-
-    %% Business Logic to File Storage
-    E3 -->|Write Files<br/>File Path| I1
-    E1 -->|Cache Location Data<br/>JSON Write| I2
-    D2 -->|Cache Firebase Keys<br/>JSON Write| I2
-    E4 -->|Write Logs<br/>Error/Info Logs| I3
-
-    %% Scheduled Tasks
-    J3 -->|Trigger Execution<br/>Windows Scheduler| J1
-    J1 -->|Query Pending Emails<br/>SELECT Status=PENDING| H8
-    J1 -->|Send Emails via SMTP<br/>Update Status| D4
-    J2 -->|Auto-generate Schedules<br/>INSERT Schedules| H4
-
-    %% Data Flow Labels
-    style A1 fill:#e1f5ff
-    style A2 fill:#e1f5ff
-    style A3 fill:#e1f5ff
-    style A4 fill:#e1f5ff
-    style A5 fill:#e1f5ff
-    style A6 fill:#e1f5ff
-    style A7 fill:#e1f5ff
-    style A8 fill:#e1f5ff
+    %% LAYER 4 to LAYER 5
+    D4 -->|"Storage"| I2
+    D7 -->|"File System"| I2
+    A7 -->|"Schedule"| I3
     
-    style B1 fill:#fff3e0
-    style B2 fill:#fff3e0
-    style B3 fill:#fff3e0
-    style B4 fill:#fff3e0
-    style B5 fill:#fff3e0
-    style B6 fill:#fff3e0
-    style B7 fill:#fff3e0
-    
-    style C1 fill:#f3e5f5
-    style C2 fill:#f3e5f5
-    style C3 fill:#f3e5f5
-    style C4 fill:#f3e5f5
-    style C5 fill:#f3e5f5
-    style C6 fill:#f3e5f5
-    style C7 fill:#f3e5f5
-    style C8 fill:#f3e5f5
-    style C9 fill:#f3e5f5
-    style C10 fill:#f3e5f5
-    
-    style D1 fill:#e8f5e9
-    style D2 fill:#e8f5e9
-    style D3 fill:#e8f5e9
-    style D4 fill:#e8f5e9
-    
-    style E1 fill:#fff9c4
-    style E2 fill:#fff9c4
-    style E3 fill:#fff9c4
-    style E4 fill:#fff9c4
-    
-    style F1 fill:#ffebee
-    
-    style EXT1 fill:#fce4ec
-    style EXT2 fill:#fce4ec
-    style EXT3 fill:#fce4ec
-    style EXT4 fill:#fce4ec
+    %% LAYER 5 Infrastructure Support
+    I1 -.->|"Hosts"| A1
+    I1 -.->|"Runs PHP"| BL1
+    I2 -.->|"Stores Data"| D4
+    I3 -.->|"Executes Cron"| A7
+
+    %% External Service Connections
+    D1 -->|"Auth Response"| S1
+    D2 -->|"Location Data"| BL1
+    D3 -->|"Email Sent"| A7
+
+    %% Styling - PRESENTATION LAYER (Red)
+    style P1 fill:#e57373,stroke:#c62828,stroke-width:3px,color:#fff
+    style P2 fill:#e57373,stroke:#c62828,stroke-width:3px,color:#fff
+    style P3 fill:#e57373,stroke:#c62828,stroke-width:3px,color:#fff
+    style LAYER1 fill:#ffebee,stroke:#c62828,stroke-width:4px
+
+    %% Styling - SECURITY LAYER (Orange)
+    style S1 fill:#ffb74d,stroke:#e65100,stroke-width:3px,color:#fff
+    style S2 fill:#ffb74d,stroke:#e65100,stroke-width:3px,color:#fff
+    style S3 fill:#ffb74d,stroke:#e65100,stroke-width:3px,color:#fff
+    style LAYER2 fill:#fff3e0,stroke:#e65100,stroke-width:4px
+
+    %% Styling - APPLICATION LAYER (Blue)
+    style A1 fill:#64b5f6,stroke:#1565c0,stroke-width:2px,color:#fff
+    style A2 fill:#64b5f6,stroke:#1565c0,stroke-width:2px,color:#fff
+    style A3 fill:#64b5f6,stroke:#1565c0,stroke-width:2px,color:#fff
+    style A4 fill:#64b5f6,stroke:#1565c0,stroke-width:2px,color:#fff
+    style A5 fill:#64b5f6,stroke:#1565c0,stroke-width:2px,color:#fff
+    style A6 fill:#64b5f6,stroke:#1565c0,stroke-width:2px,color:#fff
+    style A7 fill:#64b5f6,stroke:#1565c0,stroke-width:2px,color:#fff
+    style A8 fill:#64b5f6,stroke:#1565c0,stroke-width:2px,color:#fff
+    style LAYER3 fill:#e3f2fd,stroke:#1565c0,stroke-width:4px
+    style APP_COL1 fill:#bbdefb,stroke:#1976d2,stroke-width:2px
+    style APP_COL2 fill:#bbdefb,stroke:#1976d2,stroke-width:2px
+    style APP_COL3 fill:#bbdefb,stroke:#1976d2,stroke-width:2px
+
+    %% Styling - DATA STORAGE LAYER (Green/Teal)
+    style D1 fill:#4db6ac,stroke:#00695c,stroke-width:2px,color:#fff
+    style D2 fill:#4db6ac,stroke:#00695c,stroke-width:2px,color:#fff
+    style D3 fill:#4db6ac,stroke:#00695c,stroke-width:2px,color:#fff
+    style D4 fill:#4db6ac,stroke:#00695c,stroke-width:2px,color:#fff
+    style D5 fill:#4db6ac,stroke:#00695c,stroke-width:2px,color:#fff
+    style D6 fill:#4db6ac,stroke:#00695c,stroke-width:2px,color:#fff
+    style D7 fill:#4db6ac,stroke:#00695c,stroke-width:2px,color:#fff
+    style D8 fill:#4db6ac,stroke:#00695c,stroke-width:2px,color:#fff
+    style D9 fill:#4db6ac,stroke:#00695c,stroke-width:2px,color:#fff
+    style LAYER4 fill:#e0f2f1,stroke:#00695c,stroke-width:4px
+    style DATA_COL1 fill:#b2dfdb,stroke:#00796b,stroke-width:2px
+    style DATA_COL2 fill:#b2dfdb,stroke:#00796b,stroke-width:2px
+    style DATA_COL3 fill:#b2dfdb,stroke:#00796b,stroke-width:2px
+
+    %% Styling - INFRASTRUCTURE LAYER (Purple)
+    style I1 fill:#9575cd,stroke:#4527a0,stroke-width:3px,color:#fff
+    style I2 fill:#9575cd,stroke:#4527a0,stroke-width:3px,color:#fff
+    style I3 fill:#9575cd,stroke:#4527a0,stroke-width:3px,color:#fff
+    style LAYER5 fill:#ede7f6,stroke:#4527a0,stroke-width:4px
+
+    %% Styling - Business Logic (Yellow)
+    style BL1 fill:#fff59d,stroke:#f57f17,stroke-width:2px
+    style BL2 fill:#fff59d,stroke:#f57f17,stroke-width:2px
+    style BL3 fill:#fff59d,stroke:#f57f17,stroke-width:2px
+    style BL4 fill:#fff59d,stroke:#f57f17,stroke-width:2px
+    style BUSINESS_LOGIC fill:#fffde7,stroke:#f57f17,stroke-width:3px
+
+    %% Styling - Configuration (Light Green)
+    style CF1 fill:#aed581,stroke:#558b2f,stroke-width:2px
+    style CF2 fill:#aed581,stroke:#558b2f,stroke-width:2px
+    style CF3 fill:#aed581,stroke:#558b2f,stroke-width:2px
+    style CF4 fill:#aed581,stroke:#558b2f,stroke-width:2px
+    style CONFIG fill:#f1f8e9,stroke:#558b2f,stroke-width:3px
 ```
 
 ---
